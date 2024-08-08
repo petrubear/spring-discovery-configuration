@@ -20,8 +20,8 @@ public class ClientController {
 
     @GetMapping("/hello")
     public ClientResponse hello() {
-        var getResponse = restTemplate.getForObject(url, String.class);
-        var postResponse = helloClient.hello();
+        var getResponse = restTemplate.getForObject(url + "/edison", String.class);
+        var postResponse = helloClient.hello("edison");
 
         return ClientResponse.of(getResponse, postResponse);
     }
