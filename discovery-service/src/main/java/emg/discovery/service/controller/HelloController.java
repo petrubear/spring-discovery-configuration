@@ -9,14 +9,20 @@ import org.springframework.web.bind.annotation.*;
 public class HelloController {
 
     @GetMapping("/hello/{name}")
-    public String getHelloGet(@PathVariable("name") String name) {
+    public String getHelloGet(
+            @RequestHeader("user-greeting") String userGreeting,
+            @PathVariable("name") String name
+    ) {
         log.debug("calling getHelloGet with name: {}", name);
-        return "[GET] Hello " + name;
+        return String.format("[GET] Hello %s. %s", name, userGreeting);
     }
 
     @PostMapping("/hello")
-    public String getHelloPost(@RequestBody String name) {
+    public String getHelloPost(
+            @RequestHeader("user-greeting") String userGreeting,
+            @RequestBody String name
+    ) {
         log.debug("calling getHelloPost with name: {}", name);
-        return "[POST] Hello " + name;
+        return String.format("[POST] Hello %s. %s", name, userGreeting);
     }
 }
